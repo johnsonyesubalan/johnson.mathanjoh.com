@@ -61,6 +61,16 @@ var App = function () {
         }); 
 	}
 
+    // portfolio lazyload images
+    function lazyLoadImages() {
+        jQuery('.portfolio-item .modal').on("show.bs.modal", function () {
+            jQuery('.lazy-load').each(function(){
+                var img = $(this);
+                img.attr('src', img.data('src'));
+            });
+        });
+    }
+
 	// My Skills
 	function mySkills() {   
 
@@ -149,7 +159,8 @@ var App = function () {
 		},
 
 		portfolio: function () {  
-			portfolioFilter();  
+			portfolioFilter();
+            lazyLoadImages();
 		},
 
 		skills: function () {  
