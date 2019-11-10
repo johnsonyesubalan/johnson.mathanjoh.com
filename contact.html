@@ -176,7 +176,7 @@
 
                     <div class="col-md-8">
 
-                        <div class="form">
+                        <!--<div class="form">
                             <h4>Write Something!</h4>
                             <p>I'm always happy to make valuable new contacts and are looking <br>
                                 forward to receiving your mail or call.</p>
@@ -204,39 +204,48 @@
                                     <div class="wpcf7-response-output wpcf7-display-none"></div>
                                 </form>
                             </div>
-                        </div>
+                        </div>-->
 
 
-                        <!-- <div class="form">  -->
-
-                            <!-- <form>
+                        <div class="form"> 
+                            <h4>Write Something!</h4>
+                            <p>I'm always happy to make valuable new contacts and are looking <br>
+                                forward to receiving your mail or call.</p>
+                            <form name="portfolio-contact">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="name" placeholder="Name" required>
+                                    <input type="text" class="form-control" id="name" placeholder="Name">
+                                    <span class="input-validation"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" id="email" placeholder="Email" required>
+                                    <input type="email" class="form-control" id="email" placeholder="Email">
+                                    <span class="input-validation"></span>
                                 </div>  
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <span class="input-validation"></span>
                                 </div>  
                                 <div class="form-group">
-                                    <textarea name="message" id="message" rows="3" class="form-control" placeholder="Message" required></textarea>
+                                    <textarea name="message" id="message" rows="3" class="form-control" placeholder="Message"></textarea>
                                     <div style="display:none">
                                         <input type="text" name="honeypot" placeholder="honeypot" id="honeypot">
                                     </div>
-                                </div>  
-                                <button type="submit" class="btn blue">Submit</button>
-                                <div class="loader hide">
-                                    <div class="icon">
-                                        <svg class="circular" viewBox="25 25 50 50">
-                                          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
-                                        </svg>
-                                    </div>
-                                    <h6></h6>
-                                    <div class="close-loader"><i class="material-icons">close</i></div>
+                                    <span class="input-validation"></span>
                                 </div>
-                            </form> -->
-                        <!-- </div> -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <div class="loader hide">
+                                        <div class="icon">
+                                            <!-- <svg class="circular" viewBox="25 25 50 50">
+                                              <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+                                            </svg> -->
+                                            <img src="assets/img/ajax-loader.gif" width="25" alt="sending">
+                                        </div>
+                                        <h6 class="hide">Validation errors occurred. Please confirm the fields and submit it again.</h6>
+                                        <div class="close-loader"><i class="material-icons">close</i></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 
@@ -270,7 +279,6 @@
     <!-- JS Page Level --> 
     <!-- JS Implementing Plugins -->  
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script> 
-    <script type='text/javascript' src='plugins/contact-form-7/includes/js/scripts.js?ver=4.3.1'></script>
     <script type="text/javascript" src="assets/js/app.js"></script> 
     <script type="text/javascript">
         jQuery(document).ready(function() {

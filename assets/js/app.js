@@ -152,6 +152,95 @@ var App = function () {
         google.maps.event.addDomListener(window, 'load', initialize_map); 
 	}
 
+    function formValidation() {
+        $('form[name="portfolio-contact"]').submit(function(e) {
+            e.preventDefault();
+
+            if ($('input#honeypot').val().length != 0) {
+                return false;
+            } 
+
+            $('form .loader').removeClass('hide');
+            $('form .loader .icon').removeClass('hide');
+            $('form button').attr("disabled", true);
+            $('form .loader h6').addClass('hide');
+
+            var name = $('form #name');
+            var email = $('form #email');
+            var subject = $('form #subject');
+            var message = $('form #message');
+
+            var nameHasError = false;
+            var emailHasError = false;
+            var subjectHasError = false;
+            var messageHasError = false;
+            var hasError = false;
+            var regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            var validEmail = regEx.test(email.val());
+
+            function addRemoveClass(el, removeClass, addClass) {
+                el.parent().find('.input-validation').removeClass(removeClass).addClass(addClass);
+            }
+
+            if (name.val().length < 1) {
+                addRemoveClass(name, 'success', 'error');
+                nameHasError = true;
+            } else {
+                addRemoveClass(name, 'error', 'success');
+                nameHasError = false;
+            }
+
+            if (email.val().length < 1) {
+                addRemoveClass(email, 'success', 'error');
+                emailHasError = true;
+            } else if (!validEmail) {
+                addRemoveClass(email, 'success', 'error');
+                emailHasError = true;
+            } else {
+                addRemoveClass(email, 'error', 'success');
+                emailHasError = false;
+            }
+
+            if (subject.val().length < 1) {
+                addRemoveClass(subject, 'success', 'error');
+                subjectHasError = true;
+            } else {
+                addRemoveClass(subject, 'error', 'success');
+                subjectHasError = false;
+            }
+
+            if (message.val().length < 1) {
+                addRemoveClass(message, 'success', 'error');
+                messageHasError = true;
+            } else {
+                addRemoveClass(message, 'error', 'success');
+                messageHasError = false;
+            }
+
+            if (nameHasError || emailHasError || subjectHasError || messageHasError) {
+                $('form .loader h6').removeClass('hide').html("Validation errors occurred. Please confirm the fields and submit it again.");
+                $('form .loader .icon').addClass('hide');
+                $('form button').attr("disabled", false);
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "php/mail.php" ,
+                    data: { from: email.val(), name: name.val(), subject: subject.val(), message: message.val() },
+                    success : function() {
+                        $('form .loader h6').removeClass('hide').html("Your message was sent successfully. Thanks.");
+                        $('form .loader .icon').addClass('hide');
+                        $('form button').attr("disabled", false);
+                    },
+                    error: function() {
+                        $('form .loader h6').removeClass('hide').html("Failed to send your message. Please try later or contact the administrator by another method.");
+                        $('form .loader .icon').addClass('hide');
+                        $('form button').attr("disabled", false);
+                    }
+                });
+            }
+        });
+    }
+
 	return {
 		init: function () { 
 			bannerSlider(); 
@@ -169,6 +258,7 @@ var App = function () {
 
 		contact: function () {  
 			googleMap();
+            formValidation();
 		},
 
         profile: function () {
